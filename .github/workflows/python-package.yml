@@ -36,5 +36,5 @@ jobs:
     - name: Test with PyTest
       run: |
         # Stop the build if there are any code or unit test failures
-        pytest --codeblocks ./README.md
+        PYTHONPATH=./source:$PYTHONPATH pytest --codeblocks ./README.md
         pytest ./tests

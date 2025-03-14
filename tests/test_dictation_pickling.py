@@ -1,7 +1,6 @@
 import pytest
 import pickle
 
-import dictation
 from dictation import (
     dictation,
     AnnotationError,
