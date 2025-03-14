@@ -1,0 +1,15 @@
+# Project Files
+*@*
+*#*
+
+# Compiled Python Bytecode
+*.pyc
+__pycache__/**
+
+# Build Artifacts
+build/**
+.pytest_cache/**
+
+# Environment Files
+.env
+!.env.*

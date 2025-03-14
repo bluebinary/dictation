@@ -1,0 +1,29 @@
+services:
+
+  black:
+    container_name: dictation-black
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    environment:
+      - SERVICE=black
+    command: black --check /source /tests
+    volumes:
+      - ./source/dictation:/source/dictation
+      - ./README.md:/README.md
+      - ./source/dictation:/usr/local/lib/python3.11/site-packages/dictation
+      - ./tests:/tests
+
+  tests:
+    container_name: dictation-tests
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    environment:
+      - SERVICE=tests
+    command: pytest /tests
+    volumes:
+      - ./source/dictation:/source/dictation
+      - ./README.md:/README.md
+      - ./source/dictation:/usr/local/lib/python3.11/site-packages/dictation
+      - ./tests:/tests
