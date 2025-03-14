@@ -2,6 +2,7 @@ import pytest
 import enum
 import copy
 
+import dictation
 from dictation import (
     dictation,
     AnnotationError,
