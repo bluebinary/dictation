@@ -19,9 +19,8 @@ The `dictation` library name is a portmanteau of `dic-tionary` and `anno-tation`
 
 ### Requirements
 
-The Dictation library has been tested with Python 3.9, 3.10, 3.11, 3.12 and 3.13 but may
-work with some earlier versions such as 3.8 but has not been tested against this version
-or any earlier. The library is not compatible with Python 2.* or earlier.
+The Dictation library has been tested with Python 3.10, 3.11, 3.12 and 3.13. The library
+is not compatible with Python 3.9 or earlier.
 
 ### Installation
 
@@ -152,7 +151,7 @@ assert sample["d"].annotations == dict(y=0, z=6.789)
 # The `dictation` library also supports assigning annotations as attributes; annotations
 # added as attributes cannot use the same name as any of the class' inherent attributes,
 # properties or methods however; attempting to assign an attribute using the name of an
-# inherent class` attribute will raise an exception. So long as the annotation names are
+# inherent class attribute will raise an exception. So long as the annotation names are
 # distinct, annotations can easily be assigned and retrieved using attribute accessors:
 sample.greeting = "hello"
 
@@ -250,7 +249,7 @@ and testing:
 
 ```
 $ cd path/to/local/development/directory
-$ git clone git@github.com:<username>/dictation.git
+$ git clone git@github.com:bluebinary/dictation.git
 ```
 
 Then create a new feature/development branch, using a descriptive name for the branch:
@@ -278,7 +277,7 @@ $ docker compose run black
 If any code formatting issues are found, they will be reported by _Black_. It is also
 possible to run _Black_ so that it will automatically reformat the affected files; this
 can be achieved as follows, by passing the `--verbose` flag, which allows _Black_ to
-report which files:
+report which files have been reformatted:
 
 ```
 $ docker compose run black --verbose

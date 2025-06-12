@@ -11,7 +11,7 @@ services:
     volumes:
       - ./source/dictation:/source/dictation
       - ./README.md:/README.md
-      - ./source/dictation:/usr/local/lib/python3.11/site-packages/dictation
+      - ./source/dictation:/usr/local/lib/python/site-packages/dictation
       - ./tests:/tests
 
   tests:
@@ -25,5 +25,5 @@ services:
     volumes:
       - ./source/dictation:/source/dictation
       - ./README.md:/README.md
-      - ./source/dictation:/usr/local/lib/python3.11/site-packages/dictation
+      - ./source/dictation:/usr/local/lib/python/site-packages/dictation
       - ./tests:/tests

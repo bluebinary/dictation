@@ -1,6 +1,6 @@
 # Project Files
-*@*
-*#*
+**/@*
+**/#*
 
 # Compiled Python Bytecode
 *.pyc
@@ -9,6 +9,7 @@ __pycache__/**
 # Build Artifacts
 build/**
 .pytest_cache/**
+dist/**
 
 # Environment Files
 .env

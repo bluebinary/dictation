@@ -1,9 +1,30 @@
 # syntax = docker/dockerfile:1.4.0
 
-FROM python:3.11
+################################# [Base Python Image] ##################################
+
+# Allow the Python version to be specified as a build argument, with a preferred default
+ARG VERSION=3.12
+
+FROM python:${VERSION} AS base
+
+# Create a symlink between the installed Python version path and a versionless path to
+# ease long-term maintenance that simply requires the symlink to be generated when the
+# Python version is modified, rather than a whole range of absolute paths. Many Python
+# installations create a versionless path symlink by default; Docker's doesn't seem to.
+RUN <<ENDRUN
+	# Use 'awk' and 'cut' to extract the major.minor version from `python --version` as
+	# the major.minor, but not micro, version parts are used in the installation path:
+	VERSION=$(python --version 2>&1 | awk '{print $2}' | cut -d'.' -f1,2)
+	echo "Creating a symlink from the versioned installation path to a generic path:"
+	ln -s -v "/usr/local/lib/python${VERSION}" "/usr/local/lib/python"
+ENDRUN
 
 # Ensure pip has been upgraded to the latest version before installing dependencies
 RUN pip install --upgrade pip
+
+############################# [Development Python Image] ###############################
+
+FROM base AS development
 
 # Copy and install the dependencies from requirements.txt
 COPY requirements.development.txt /app/requirements.development.txt
@@ -32,16 +53,14 @@ ARGS=( "$@" );
 
 echo -e "entrypoint.sh called with arguments: ${ARGS[@]} (service: ${SERVICE})";
 
-if [[ "${ARGS[0]}" == "black" ]]; then
-	echo -e "black ${ARGS[@]:1} /source /tests";
-	black ${ARGS[@]:1} /source /tests;
-elif [[ "${ARGS[0]}" == "pytest" ]]; then
-	echo -e "pytest /tests ${ARGS[@]:1}";
-	pytest /tests ${ARGS[@]:1};
-	pytest --verbose --codeblocks /README.md;
-elif [[ "${SERVICE}" == "black" ]]; then
-	echo -e "black ${ARGS[@]} /source /tests";
-	black ${ARGS[@]} /source /tests;
+if [[ "${SERVICE}" == "black" ]]; then
+	if [[ "${ARGS[0]}" == "--reformat" ]]; then
+		echo -e "black --verbose ${ARGS[@]:1} /source /tests";
+		black --verbose ${ARGS[@]:1} /source /tests;
+	else
+		echo -e "black --check ${ARGS[@]:1} /source /tests";
+		black --check ${ARGS[@]:1} /source /tests;
+	fi
 elif [[ "${SERVICE}" == "tests" ]]; then
 	echo -e "pytest /tests ${ARGS[@]}";
 	pytest /tests ${ARGS[@]};
