@@ -159,7 +159,7 @@ several additional class methods and properties as documented below:
  not be called directly, rather it is called when an attribute getter pattern is used in the
  code. The method accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item is found, its value is returned
   otherwise an `AttributeError` exception will be raised.
 
@@ -168,10 +168,10 @@ several additional class methods and properties as documented below:
  directly, rather it is called when an attribute setter pattern is used in the code. The
  method accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the
   item to add to the dictionary.
 
-  * `value` (`object`) – (required) the `value` argument is used to specify the value for
+   * `value` (`object`) – (required) the `value` argument is used to specify the value for
   the item that will be set at the specified `key` within the dictionary.
 
  * `__delattr__(...)` – the `__delattr__()` magic method provides support for deleting
@@ -179,7 +179,7 @@ several additional class methods and properties as documented below:
  rather it is called when an attribute deletion pattern is used in the code. The method
  accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the
   item to remove from the dictionary.
 
 <a name="demo-dottedict"></a>
@@ -195,7 +195,7 @@ several additional class methods and properties as documented below:
  should not be called directly, rather it is called when an item existence check via the
  `in` keyword is used in the code. The method accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to look up in the dictionary. If the item is found the method returns `True` or `False`
   otherwise.
 
@@ -204,7 +204,7 @@ several additional class methods and properties as documented below:
  This magic method should not be called directly, rather it is called when an item getter
  access pattern is used in the code. The method accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item is found, its value is returned
   otherwise a `KeyError` exception will be raised.
 
@@ -213,11 +213,11 @@ several additional class methods and properties as documented below:
  rather it is called when an item setter access pattern is used in the code. The method
  accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item is found, its value is returned
   otherwise a `KeyError` exception will be raised.
 
-  * `value` (`object`) – (required) the `value` argument is used to specify the value for
+   * `value` (`object`) – (required) the `value` argument is used to specify the value for
   the item that will be set at the specified `key` within the dictionary.
 
  * `__delitem__(...)` – The `__delitem__()` magic method provides support for deleting a
@@ -225,18 +225,18 @@ several additional class methods and properties as documented below:
  rather it is called when an item deletion is performed via the `del` keyword in the code.
  The method accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item is found, its value is returned
   otherwise a `KeyError` exception will be raised.
 
  * `get(...)` (`object`) – The `get()` method overrides the standard dictionary `get()`
  method to support accessing dictionary items via an optionally dotted key path. The method accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item cannot be found, the method will
   return the specified `default` value if a `default` value has been specified or `None`.
 
-  * `default` (`object`) – (optional) the `default` argument can be used to specify the
+   * `default` (`object`) – (optional) the `default` argument can be used to specify the
   fallback default value that the `get()` method should return in the case that an item
   at the specified key path does not exist. If no `default` argument is specified, the
   `get()` method will return `None`.
@@ -245,24 +245,24 @@ several additional class methods and properties as documented below:
  if a dictionary item exists at an optionally dotted key path or not. The method accepts
  the following arguments:
 
- * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary.
 
  * `set(...)` (`lazydict`) – The `set()` method compliments the standard dictionary `get()` method to support setting a dictionary item value at the specified key path. The method
  accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item cannot be found, the method will
   return the specified `default` value if a `default` value has been specified or `None`.
 
-  * `value` (`object`) – (required) the `value` argument is used to specify the value to
+   * `value` (`object`) – (required) the `value` argument is used to specify the value to
   set for the specified `key`.
 
  * `unset(...)` (`lazydict`) – The `unset()` method compliments the `set()` method to
  support unsetting or deleting a dictionary item at the specified key path. The method
  accepts the following arguments:
 
- * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item cannot be found, the method will
   return the specified `default` value if a `default` value has been specified or `None`.
 
@@ -280,7 +280,7 @@ several additional class methods and properties as documented below:
  be called directly, rather it is called when an item getter access pattern is used in the
  code. The method accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to look up in the dictionary. If the item is found the method returns `True` or `False`
   otherwise.
 
@@ -290,11 +290,11 @@ several additional class methods and properties as documented below:
  loaded or not. This magic method should not be called directly, rather it is called when
  an item setter access pattern is used in the code. The method accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item is found, its value is returned
   otherwise a `KeyError` exception will be raised.
 
-  * `value` (`object`) – (required) the `value` argument is used to specify the value for
+   * `value` (`object`) – (required) the `value` argument is used to specify the value for
   the item that will be set at the specified `key` within the dictionary.
 
  * `__delitem__(...)` – The `__delitem__()` magic method supports overriding the standard
@@ -304,7 +304,7 @@ several additional class methods and properties as documented below:
  an item deletion is performed via the `del` keyword in the code. The method accepts the
  following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to look up in the dictionary. If the item is found the method returns `True` or `False`
   otherwise.
 
@@ -312,11 +312,11 @@ several additional class methods and properties as documented below:
  method to support lazily loading dictionary items. The method accepts the following
  arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item cannot be found, the method will
   return the specified `default` value if a `default` value has been specified or `None`.
 
-  * `default` (`object`) – (optional) the `default` argument can be used to specify the
+   * `default` (`object`) – (optional) the `default` argument can be used to specify the
   fallback default value that the `get()` method should return in the case that an item
   at the specified key path does not exist and cannot be loaded or is intentionally not
   loaded by the callback lazy loader method. If no `default` argument is specified, the
@@ -325,24 +325,24 @@ several additional class methods and properties as documented below:
  * `has(...)` (`bool`) – The `has()` method compliments the `get()` method to support
  determining if a dictionary item exists or not. The method accepts the following arguments:
 
- * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary.
 
  * `set(...)` (`lazydict`) – The `set()` method compliments the standard dictionary `get()`
  method to support setting a dictionary item value at the specified key path. The method
  accepts the following arguments:
 
-  * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item cannot be found, the method will
   return the specified `default` value if a `default` value has been specified or `None`.
 
-  * `value` (`object`) – (required) the `value` argument is used to specify the value to
+   * `value` (`object`) – (required) the `value` argument is used to specify the value to
   set for the specified `key`.
 
  * `unset(...)` (`lazydict`) – The `unset()` method compliments the `set()` method to support
  unsetting or deleting a dictionary item at the specified key path. The method accepts the following arguments:
 
- * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
+   * `key` (`object`) – (required) the `key` argument is used to specify the key for the item
   to attempt to retrieve from the dictionary. If the item cannot be found, the method will
   return the specified `default` value if a `default` value has been specified or `None`.
 
