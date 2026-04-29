@@ -1,10 +1,6 @@
-import pytest
-import pickle
+from dictation import dictation
 
-from dictation import (
-    dictation,
-    AnnotationError,
-)
+import pickle
 
 
 def test_dictation_pickling_and_unpickling():

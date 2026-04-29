@@ -27,9 +27,14 @@ RUN pip install --upgrade pip
 FROM base AS development
 
 # Copy and install the dependencies from requirements.txt
+COPY requirements.txt /app/requirements.txt
+RUN pip install --requirement /app/requirements.txt
+
+# Copy and install the dependencies from requirements.development.txt
 COPY requirements.development.txt /app/requirements.development.txt
 RUN pip install --requirement /app/requirements.development.txt
 
+# Copy and install the dependencies from requirements.deployment.txt
 # COPY requirements.deployment.txt /app/requirements.deployment.txt
 # RUN pip install --requirement /app/requirements.deployment.txt
 
@@ -43,15 +48,16 @@ COPY ./README.md /README.md
 COPY ./tests /tests
 
 # Copy the library source into the container's site-packages folder for the unit tests
-COPY ./source/dictation /usr/local/lib/python3.11/site-packages/dictation
+COPY ./source/dictation /usr/local/lib/python/site-packages/dictation
 
 # Create a custom entry point that allows us to override the command as needed
-COPY <<"EOF" /entrypoint.sh
+# Create a custom entry point that allows us to override the command as needed
+COPY <<"COPYEOF" /entrypoint.sh
 #!/bin/bash
 
 ARGS=( "$@" );
 
-echo -e "entrypoint.sh called with arguments: ${ARGS[@]} (service: ${SERVICE})";
+echo -e "entrypoint.sh called with arguments: ${ARGS[@]}";
 
 if [[ "${SERVICE}" == "black" ]]; then
 	if [[ "${ARGS[0]}" == "--reformat" ]]; then
@@ -61,14 +67,32 @@ if [[ "${SERVICE}" == "black" ]]; then
 		echo -e "black --check ${ARGS[@]:1} /source /tests";
 		black --check ${ARGS[@]:1} /source /tests;
 	fi
+elif [[ "${SERVICE}" == "flakes" ]]; then
+	echo -e "pyflakes ${ARGS[@]:1}";
+	pyflakes ${ARGS[@]:1} /source /tests;
 elif [[ "${SERVICE}" == "tests" ]]; then
+	echo -e "pytest /tests ${ARGS[@]}";
+	pytest /tests ${ARGS[@]};
+	pytest --verbose --codeblocks /README.md;
+elif [[ "${SERVICE}" == "all" ]]; then
+	if [[ "${ARGS[0]}" == "--reformat" ]]; then
+		echo -e "black --verbose ${ARGS[@]:1} /source /tests";
+		black --verbose ${ARGS[@]:1} /source /tests;
+	else
+		echo -e "black --check ${ARGS[@]:1} /source /tests";
+		black --check ${ARGS[@]:1} /source /tests;
+	fi
+	
+	echo -e "pyflakes ${ARGS[@]:1} /source /tests";
+	pyflakes ${ARGS[@]:1} /source /tests;
+	
 	echo -e "pytest /tests ${ARGS[@]}";
 	pytest /tests ${ARGS[@]};
 	pytest --verbose --codeblocks /README.md;
 else
 	echo -e "No valid command was specified nor defined in the `SERVICE` environment!";
 fi
-EOF
+COPYEOF
 
 RUN chmod +x /entrypoint.sh
 
