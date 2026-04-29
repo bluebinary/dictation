@@ -1,8 +1,8 @@
 [project]
 name = "dictation"
-description = "Annotated dictionaries for Python"
+description = "Annotated and other specialised dictionaries for Python"
 readme = {file = "README.md", content-type = "text/markdown"}
-keywords = ["dictionary", "dict", "annotated dictionary"]
+keywords = ["dictionary", "dict", "annotated dictionary", "dictionary types"]
 authors = [{name = "Daniel Sissman"}]
 license = {file = "LICENSE.md", content-type = "text/markdown"}
 classifiers = [
@@ -11,6 +11,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14"
 ]
 requires-python = ">=3.10"
 dynamic = [
@@ -24,6 +25,7 @@ documentation = "https://github.com/bluebinary/dictation/blob/main/README.md"
 changelog = "https://github.com/bluebinary/dictation/blob/main/CHANGELOG.md"
 repository = "https://github.com/bluebinary/dictation"
 issues = "https://github.com/bluebinary/dictation/issues"
+homepage = "https://github.com/bluebinary/dictation"
 
 [build-system]
 requires = ["setuptools", "wheel"]

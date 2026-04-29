@@ -1,1 +1,2 @@
 # Dictation Library: Runtime Dependencies
+classicist==1.0.5

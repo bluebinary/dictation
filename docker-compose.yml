@@ -1,3 +1,9 @@
+x-volume-mounts: &volumes
+  - ./source/dictation:/source/dictation
+  - ./README.md:/README.md
+  - ./source/dictation:/usr/local/lib/python/site-packages/dictation
+  - ./tests:/tests
+
 services:
 
   black:
@@ -5,25 +11,30 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: ./
+    image: dictation-black
     environment:
       - SERVICE=black
-    command: black --check /source /tests
     volumes:
-      - ./source/dictation:/source/dictation
-      - ./README.md:/README.md
-      - ./source/dictation:/usr/local/lib/python/site-packages/dictation
-      - ./tests:/tests
+      *volumes
+
+  flakes:
+    container_name: consonance-client-flakes
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    image: dictation-flakes
+    environment:
+      - SERVICE=flakes
+    volumes:
+      *volumes
 
   tests:
     container_name: dictation-tests
     build:
       dockerfile: ./Dockerfile
       context: ./
+    image: dictation-tests
     environment:
       - SERVICE=tests
-    command: pytest /tests
     volumes:
-      - ./source/dictation:/source/dictation
-      - ./README.md:/README.md
-      - ./source/dictation:/usr/local/lib/python/site-packages/dictation
-      - ./tests:/tests
+      *volumes

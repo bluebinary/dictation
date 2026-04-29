@@ -1,5 +1,4 @@
 import pytest
-import enum
 import copy
 
 from dictation import (
@@ -220,6 +219,8 @@ def test_nested_dictation_instantiation():
 
 
 def test_nested_dictation_annotation():
+    """Test creating nested annotations on a dictation dictionary instance."""
+
     source = {
         "a": {
             "b": 1,
@@ -243,9 +244,6 @@ def test_nested_dictation_annotation():
     assert dictation(sample) == source
 
     assert len(sample.annotations) == 0
-
-    zample = copy.copy(sample)
-    zample = copy.deepcopy(sample)
 
     sample.x = 123
 
@@ -458,3 +456,101 @@ def test_dictation_items_iteration(sampleA: dictation, sampleB: dictation):
         "d": 4,
         "e": 5,
     }
+
+
+def test_dictation_copy():
+    """Test calling copy.copy() on a dictation dictionary instance."""
+
+    source = {
+        "a": {
+            "b": 1,
+        },
+        "c": 2,
+    }
+
+    sample = dictation(source)
+
+    assert isinstance(sample, dict)
+    assert isinstance(sample, dictation)
+    assert len(sample) == 2
+    assert len(sample.keys()) == 2
+    assert len(sample.values()) == 2
+    assert list(sample.keys()) == ["a", "c"]
+    assert list(sample.values()) == [{"b": 1}, 2]
+    assert list(sample.items()) == [("a", {"b": 1}), ("c", 2)]
+
+    assert sample == source
+    assert dict(sample) == source
+    assert dictation(sample) == source
+
+    sample.x = 123
+
+    assert sample.x == 123
+    assert sample.annotations == dict(x=123)
+
+    zample = copy.copy(sample)
+
+    assert isinstance(zample, dict)
+    assert isinstance(zample, dictation)
+    assert len(zample) == 2
+    assert len(zample.keys()) == 2
+    assert len(zample.values()) == 2
+    assert list(zample.keys()) == ["a", "c"]
+    assert list(zample.values()) == [{"b": 1}, 2]
+    assert list(zample.items()) == [("a", {"b": 1}), ("c", 2)]
+
+    assert zample == source
+    assert dict(zample) == source
+    assert dictation(zample) == source
+
+    assert zample.x == 123
+    assert zample.annotations == dict(x=123)
+
+
+def test_dictation_deepcopy():
+    """Test calling copy.deepcopy() on a dictation dictionary instance."""
+
+    source = {
+        "a": {
+            "b": 1,
+        },
+        "c": 2,
+    }
+
+    sample = dictation(source)
+
+    assert isinstance(sample, dict)
+    assert isinstance(sample, dictation)
+    assert len(sample) == 2
+    assert len(sample.keys()) == 2
+    assert len(sample.values()) == 2
+    assert list(sample.keys()) == ["a", "c"]
+    assert list(sample.values()) == [{"b": 1}, 2]
+    assert list(sample.items()) == [("a", {"b": 1}), ("c", 2)]
+
+    assert sample == source
+    assert dict(sample) == source
+    assert dictation(sample) == source
+
+    sample.x = 123
+
+    assert sample.x == 123
+    assert sample.annotations == dict(x=123)
+
+    zample = copy.deepcopy(sample)
+
+    assert isinstance(zample, dict)
+    assert isinstance(zample, dictation)
+    assert len(zample) == 2
+    assert len(zample.keys()) == 2
+    assert len(zample.values()) == 2
+    assert list(zample.keys()) == ["a", "c"]
+    assert list(zample.values()) == [{"b": 1}, 2]
+    assert list(zample.items()) == [("a", {"b": 1}), ("c", 2)]
+
+    assert zample == source
+    assert dict(zample) == source
+    assert dictation(zample) == source
+
+    assert zample.x == 123
+    assert zample.annotations == dict(x=123)
