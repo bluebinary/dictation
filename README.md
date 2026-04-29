@@ -1,4 +1,4 @@
-# Dictation: Annotated Python Dictionaries
+# Dictation: Annotated & Specialised Python Dictionaries
 
 The Dictation library compliments Python's built-in `dict` data type by offering several
 fully compatible dictionary subclasses:
